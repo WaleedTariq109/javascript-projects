@@ -11,7 +11,7 @@ const score = document.querySelector('.score');
 const highScore = document.querySelector('.highscore');
 
 // Generate Random number between 1 to 20
-const randomNumber = Math.trunc(Math.random() * 20) + 1;
+let randomNumber = Math.trunc(Math.random() * 20) + 1;
 number.textContent = randomNumber;
 let state = 20;
 
@@ -22,6 +22,7 @@ chechBtn.addEventListener('click', function () {
   } else if (guessNumber === randomNumber) {
     message.textContent = '🎉 Correct Guess';
     body.style.backgroundColor = '#60b347';
+    number.style.width = '30rem';
     highScore.textContent = state;
   } else if (guessNumber > randomNumber) {
     if (state > 1) {
@@ -40,4 +41,13 @@ chechBtn.addEventListener('click', function () {
       message.textContent = '💣 You Lost';
     }
   }
+});
+
+againBtn.addEventListener('click', function () {
+  state = 20;
+  randomNumber = Math.trunc(Math.random() * 20) + 1;
+  number.textContent = '?';
+  message.textContent = 'Start guessing...';
+  body.style.backgroundColor = '#222';
+  number.style.width = '15rem';
 });
