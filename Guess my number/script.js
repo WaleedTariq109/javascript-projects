@@ -14,6 +14,7 @@ const highScore = document.querySelector('.highscore');
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
 number.textContent = randomNumber;
 let state = 20;
+let highScoreState = 0;
 
 chechBtn.addEventListener('click', function () {
   const guessNumber = Number(guess.value);
@@ -23,7 +24,11 @@ chechBtn.addEventListener('click', function () {
     message.textContent = '🎉 Correct Guess';
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
-    highScore.textContent = state;
+    number.textContent = randomNumber;
+    highScoreState = state;
+    if (state > highScoreState) {
+      highScore.textContent = state;
+    }
   } else if (guessNumber > randomNumber) {
     if (state > 1) {
       message.textContent = '↗ Too High';
@@ -45,9 +50,11 @@ chechBtn.addEventListener('click', function () {
 
 againBtn.addEventListener('click', function () {
   state = 20;
+  score.textContent = state;
   randomNumber = Math.trunc(Math.random() * 20) + 1;
-  number.textContent = '?';
+  //   number.textContent = '?';
   message.textContent = 'Start guessing...';
   body.style.backgroundColor = '#222';
   number.style.width = '15rem';
+  guess.value = '';
 });
