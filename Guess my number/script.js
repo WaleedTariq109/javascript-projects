@@ -22,26 +22,26 @@ againBtn.addEventListener('click', reset);
 // Helper Functions
 function checkScoreState(msg) {
   if (state > 1) {
-    message.textContent = msg;
+    displayMessage(msg);
     state--;
     score.textContent = state;
   } else {
-    message.textContent = '💣 You Lost';
+    displayMessage('💣 You Lost');
   }
 }
 
 function matchScore() {
   const guessNumber = Number(guess.value);
   if (!guessNumber) {
-    message.textContent = 'No Number ⛔';
+    displayMessage('No Number ⛔');
   } else if (guessNumber === randomNumber) {
-    message.textContent = '🎉 Correct Guess';
+    displayMessage('🎉 Correct Guess');
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
     number.textContent = randomNumber;
-    highScoreState = state;
-    if (state >= highScoreState) {
-      highScore.textContent = state;
+    if (state > highScoreState) {
+      highScoreState = state;
+      highScore.textContent = highScoreState;
     }
   } else if (guessNumber > randomNumber) {
     checkScoreState('↗ Too High');
@@ -50,12 +50,16 @@ function matchScore() {
   }
 }
 
+function displayMessage(msg) {
+  message.textContent = msg;
+}
+
 function reset() {
   state = 20;
   score.textContent = state;
   randomNumber = Math.trunc(Math.random() * 20) + 1;
   number.textContent = '?';
-  message.textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   body.style.backgroundColor = '#222';
   number.style.width = '15rem';
   guess.value = '';
